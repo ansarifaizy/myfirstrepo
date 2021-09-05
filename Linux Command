@@ -1,0 +1,403 @@
+==========================Suse NTP Server================================
+# chronyc sources -V  --- To check conectivity with NTP Server
+# cat /etc/ntp.conf.rpmsave  --- Check NTP server entry
+# cat /etc/chrony.conf   ----- Check NTP server entry
+# chronyc  tracking  --- NTP sync details
+# timedatectl ------ To check time and date details
+# ntpq -p  
+===========================JDK Installation on Suse==============
+#export http_proxy='http://10.44.7.132:8080'
+#export https_proxy='http://10.44.7.132:8080'
+
+ping google.com
+# wget https://download.oracle.com/ot?AuthParam=1565245457_fee5148ece775
+# ls
+# mv jdk-7u45-linux-x64.tar.gz\?AuthPf1f5 jdk-7u45-linux-x64.tar.gz
+ls
+# mv jdk-7u45-linux-x64.tar.gz /opt/
+# cd /opt
+# ls
+# tar -xzf jdk-7u45-linux-x64.tar.gz
+# cd jdk1.7.0_45/
+# cd bin
+# java -version
+# ./java -version
+# vi /etc/profile
+export JAVA_HOME=/opt/jdk1.7.0_45
+export PATH=$JAVA_HOME/bin:$PATH
+# cd
+# java -version
+# export JAVA_HOME=/opt/jdk1.7.0_45
+# export PATH=$JAVA_HOME/bin:$PATH
+# java -version
+ip r l
+
+10.187.1.46 - 10.44.2.134 - aba
+
+==============================Change Pre authentication banner=====================================
+
+Edit the file : /etc/issue.net
+
+==============================nfs on solaris server===================================================
+
+share -F nfs -o rw,anon=0   /oracle6/EXPP20
+
+======================================For NEW VM Deploymet=============================
+
+hostname
+ip (vlan)
+root enable
+SSH Timeout
+UUUID
+NTP - Verify.
+Mount - FS
+
+hostnamectl set-hostname HOSTNAME
+
+pvcreate /dev/sdb
+vgcreate SWAPVG /dev/sdb
+ lvcreate -l +100%FREE -n swaplv SWAPVG
+mkswap /dev/mapper/SWAPVG-swaplv
+free -m
+cat /etc/fstab
+echo -e "/dev/mapper/SWAPVG-swaplv   swap                 swap       defaults              0 0" >> /etc/fstab
+swapon /dev/mapper/SWAPVG-swaplv
+free -g
+
+pvcreate /dev/sdc
+ vgcreate TMPVG /dev/sdc
+lvcreate -l +100%FREE -n tmplv TMPVG
+mkfs.xfs /dev/mapper/TMPVG-tmplv
+cd /tmp/
+ mkdir /tmp_1
+mount /dev/mapper/TMPVG-tmplv /tmp_1
+mv * /tmp_1/.
+umount /tmp_1
+echo -e "/dev/mapper/osvg-tmplv  /tmp  xfs  defaults  0  0" >> /etc/fstab
+mount -a
+export http_proxy='http://10.44.7.132:8080'
+export https_proxy='https://10.44.7.132:8080'
+
+===========================NFS configuration on Suse Linux=========================================
+Suser server:
+vi /etc/exports
+/home           192.168.0.101(rw,sync,no_root_squash,no_subtree_check)
+systemctl restart nfsserver
+systemctl enable nfsserver
+exportfs -a
+Solaris client
+mount -F nfs -o rw 10.44.2.78:/path /mountpoint 
+=====================================limit & sysctl=============================================
+cat /etc/sysctl.conf 
+cat /etc/security/limits.conf
+
+
+Reference - 10.44.2.51
+=================================extend swap size=====================================================
+
+#swapoff -a
+#lvextend 
+#mkswap /dev/mapper/VGNAME-LVname
+#swapon -s
+==================================Find word from multiple files=====================================
+
+#grep wordtofind /path/
+#find . -type f | grep "keyword" *
+
+================================Remove disk from VG==================================
+
+pvs -o+pv_used
+vgreduce myvg /dev/sdb1
+
+===================================================================================
+usrmod --shell csh/bash username
+
+
+ln -s /filesrv/isuint /isuint
+
+====================================== installing maldet and scanning=====================
+
+https://www.servernoobs.com/how-to-install-and-configure-maldet-linux-malware-detect-lmd/
+
+#maldet -d or maldet -u ---------- to update the av
+#maldet a  /home/* ----------------- to scan the files
+===========================================================================================
+ntpdate -du 137.59.202.2
+ nc -z -v -u 137.59.202.2 123
+
+======================Ubuntu 18.04==================
+
+IP Configure - /etc/network/interface
+nameserver - /etc/resolveconf/resolve.conf.d/head
+Firewall - iptables -L & ufw status
+apt-get install packagename
+apt-get upgrade ---- To update packages
+apt-get update ----- Check for update
+apt-get dist-upgrade ----- To update patching
+apt-get install ubuntu-desktop ----- To install GUI 
+====================================================
+For Virtual NIC removal. 
+ifconfig -a
+grep -R "virbr0" .
+/bin/systemctl stop libvirtd.service
+chkconfig --list | grep libvirtd
+/bin/systemctl status libvirtd.service
+/bin/systemctl disable libvirtd.service
+virsh net-list
+ifconfig virbr0
+brctl show
+ip link set virbr0 down
+brctl delbr virbr0
+ifconfig -a
+ip link delete virbr0-nic type bridge
+===================================================================
+mount -t nfs -o nfsvers=3 10.54.101.74:/usr/sap/Q20 /usr/sap/Q20
+=======================================================================
+
+tune2fs -l /dev/partition
+tune2fs -m 2 /dev/partition  ---- 2 number is mentioned to % ( u want to keep reserv)
+
+=========================================================================
+
+subscription-manager status
+subscription-manager register ----------------- Register with Ctrls ID
+username - ctrls_1
+Password - ctrls@123 
+subscription-manager register --username ctrls_1 --password ctrls@123 --auto-attach
+subscription-manager register --force ------------- Register forcefully
+subscription-manager attach --auto ---------------- available subscription that matches the current system
+
+subscription-manager release --set=7.6   ---------------- set required package need to update
+yum --releasever=7.6 update 
+
+=========================================================================================
+To scan the disk 
+echo " - - - " >/sys/class/scsi_host/host2/scan  
+echo "- - -" > /sys/class/scsi_host/host0/scan
+========================================================================================
+
+yumdownloader elfutils-libelf-devel uuidd --destdir /opt/ --resolve
+=====================================================================================
+vi /etc/default/grub
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+grub2-mkconfig -o /boot/grub2/grub.cfg
+=========================================================================================
+
+yum install iotop iftop -y
+==================================MCGM======================
+subscription-manager register --username mcgm-govt --password Mcgm@1234 --auto-attach –force
+=============================================================================================
+
+IP flush on Ubuntu
+# ip addr flush dev ens160
+
+==================================================================
+Disable password aging for a user
+chage -I -1 -m 0 -M 99999 -E -1
+
+===============================================
+yum install rsync rsyslog gcc cc wget ntpdate iotop chrony net-tools nfs-utils sysstat telnet atop yum-utils kexec-tools epel-release atop wget chrony iftop nfs-utils yum-utils iftop mlocate -y 
+
+===================================================================================
+
+If issue while installing/upgrading packages on Ubuntu
+
+sudo -i
+apt-get clean
+cd /var/lib/apt
+mv lists lists.old
+mkdir -p lists/partial
+apt-get clean
+apt-get update
+================================VNC Installation===================================
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-18-04
+
+===========================================================================
+
+yum update --exclude=http* --exclude=mysql* --exclude=java* -y
+
+yum install xorg-x11* -y
+RHEL 7
+yum groupinstall "Server with GUI"
+ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
+##To install xclock on CentOS 8.
+dnf config-manager --enable PowerTools
+yum install xorg-x11* -y
+=========================Sudo access error======================================
+Error - sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set 
+chmod u+s /usr/bin/sudo
+
+===============Clear history===================================================
+cat /dev/null > ~/.bash_history
+====================Timestamp for history=====================================
+export HISTTIMEFORMAT="%d/%m/%y %T"
+vi ~/.bashrc  - - - For persistant 
+=======================Ubuntu /run full issue===============================================
+sudo mount -o remount,size=1G /run 
+
+=====================Free SSL Certificate Installation===================================
+https://geekflare.com/free-ssl-certificate-apache-letsencrypt/ 
+
+==========================Repos for updating CentOS=====================================
+[root@centos76 yum.repos.d]# cat CentOS76.repo
+[CentOS7.6]
+name=CentOS7.6
+baseurl=https://archive.kernel.org/centos-vault/7.6.1810/updates/x86_64/
+enabled=1
+================================MYSQL Installation=================================================
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+yum update
+sudo yum install mysql-server
+sudo mysql_secure_installation
+https://www.linode.com/docs/databases/mysql/how-to-install-mysql-on-centos-7/
+=================Reset root Password in mysql====================================
+Start mysql
+systemctl stop mysqld
+mysqld_safe --skip-grant-tables &
+systemctl start mysqld
+mysql -u root
+flush privileges;
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
+flush privileges;
+mysqladmin -u root -p shutdown - Enter new password
+systemctl start mysqld
+mysql -u root -p  --- With new password
+
+Ubuntu - https://linuxconfig.org/how-to-reset-root-mysql-password-on-ubuntu-18-04-bionic-beaver-linux/
+===================Grant Permission in MYSQL================
+GRANT ALL ON *.* to root@'%' IDENTIFIED BY 'mysql root password';
+FLUSH PRIVILEGES;
+====================Galera Cluster Article=========================================
+https://www.atlantic.net/vps-hosting/how-to-install-and-configure-mariadb-galera-cluster-on-ubuntu-18-04/
+=========================To check Public IP =========================================================
+curl ifconfig.me
+====================================================================================
+echo -e "182.18.139.107 GCTSRMTREPO.COM GCTSRMTREPO" >> /etc/hosts
+wget http://GCTSRMTREPO.COM/tools/rmt-client-setup
+sh rmt-client-setup https://182.18.139.107/ 
+
+SUSEConnect -r 72F4BF9DBDD5E8 Ajeem.koralli@adani.com
+==============================================================================
+
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head  - To check memory n cpu utilization
+
+sync; echo 1 > /proc/sys/vm/drop_caches  ---- Clear cache
+sync; echo 2 > /proc/sys/vm/drop_caches
+sync; echo 3 > /proc/sys/vm/drop_caches
+=========================Creating user with numerical ID====================================================
+useradd -d /home/01489 -s /bin/bash -c "01489" -m user1
+echo -e "GMxaOXKCm0MsnT\nGMxaOXKCm0MsnT"|sudo passwd user1
+echo "01489        ALL=(ALL)       ALL" >> /etc/sudoers
+sed -i 's/user1/01489/g' /etc/passwd
+sed -i 's/user1/01489/g' /etc/group
+sed -i 's/user1/01489/g' /etc/shadow
+=============================Install exfat on red hat 7====================================================================
+
+yum group install 'Development Tools'
+yum install fuse-devel
+cd /usr/local/src && git clone https://github.com/relan/exfat.git
+cd exfat
+autoreconf --install
+./configure --prefix=/usr
+make && make install
+make clean
+=====================================================================================================
+setfacl -m u:Username:rwx /opt
+getfacl /opt
+========================Ubuntu on GCP (Extend disk)========================================
+gdisk /dev/sda
+=============================If NFS service is masked (SUSE)=====================================
+remove the file /etc/systemd/system/nfsserver.service
+systemctl unmask nfsserver
+
+========================Physical server make interface UP=========================================================
+
+ifconfig <interface name> up
+ip link set dev <interface> up
+============================Linux to Windows NFS===================================================
+https://www.techbeatly.com/2019/06/mounting-nfs-share-from-linux-to-windows-server.html#.YGGtQ7DivIU
+
+=================================================================================
+
+date;rsync -avz --progress --stats 002 003 004 /imageshare/backup/newbackupdata/.;date 
+nohup sh -c 'date;rsync -avzt test.txt /home/ctrls_unix/.;date' & 
+rsync -avz --progress --stats -e 'ssh -p 4422' EDMS root@172.16.11.26:/var/DMS/. 
+
+==========================Check TLS version=========================================
+openssl ciphers -v | awk '{print $2}' | sort | uniq
+============================================================
+
+route add 172.27.35.0 mask 255.255.255.0 172.27.8.1 -p
+==================Generate the ssl certificate=========================================
+openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr
+Enter the required details:
+Country Name - IN
+State or Province Name - Maharashtra
+Locality Name (eg, city)  - Mumbai
+Organization Name - Volkswagen Finance PVT LTD
+Common Name (eg, your name or your server's hostname) - 172.27.20.12 (If IP based enter IP or else enter Domain name)
+Email Address - helpdesk.india@vwfs.com
+
+Once the csr and key generated -  enter below command to generate the certificate 
+openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+
+========================Zypper migration Issue===========================================
+dsilprdapp3:~ # SUSEConnect -d
+Deregistering system from registration proxy https://182.18.139.107/
+
+Deactivating sle-module-python2 15.1 x86_64 ...
+Error: Registration server returned 'Python 2 Module is not yet activated on the system.' (422)
+--------
+Solution - yast2-software-product registration - select the python repo and install
+
+=====================================================================================
+dsilprdapp1:/etc/sysconfig/network # cat ifroute-eth0
+default 172.26.9.1 - eth0
+
+========================================================================================
+ip addr add X.X.X.X/24 dev eth0
+ifconfig eth0 X.X.X.X netmask 255.255.255.0
+route add default gw X.X.X.X eth0
+====================================================
+Firewall ip	port
+103.231.42.180	10443
+=========================================
+
+crm status 
+crm configure show
+
+
+username="test5"
+password="test5@123"
+pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
+sudo useradd -d /home/$username -s /bin/bash -p "$pass" -m "$username"
+sudo sed -i "$ a $username ALL=(ALL) ALL" /etc/sudoers
+sudo cat /etc/passwd | grep -i $username
+sudo cat /etc/sudoers | grep -i $username
+
+chage -M 90 -m 10 <username>
+
+PxYvF72EOq
+
+ssh-keygen
+ssh-copy-id -i id_rsa.pub oracle@172.31.218.31
+ssh-copy-id -i id_rsa.pub oracle@172.31.218.32
+ssh-copy-id -i id_rsa.pub oracle@172.31.218.33
+
+ssh-copy-id -i id_rsa.pub grid@172.31.218.31
+ssh-copy-id -i id_rsa.pub grid@172.31.218.32
+ssh-copy-id -i id_rsa.pub grid@172.31.218.33
+/UNIX_INV/Unix-ENT/Ent_PD/Templates/Q3_CIS_Dec_2020_Debian10-60GB
+
+
+rsync -avzh --progress root@192.168.0.208:/hana/data/backup/friday/* .
+
+7xKJEeXFpU6ur}cp
+
+
+root - hana4us
+
+Auto failover or manual 
+
