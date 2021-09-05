@@ -1,3 +1,4 @@
 I'm creating new file
 Adding second line for test
 Third Line
+Fourth Line - Added from Remote
