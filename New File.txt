@@ -1,5 +1,0 @@
-Hello Everyone
-Myself Faiz Ansari 
-
-Created test file for Git
-fifth line for local
