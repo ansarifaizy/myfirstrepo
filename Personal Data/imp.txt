@@ -1,0 +1,302 @@
+8828421968 Vinod
+
+
+
+103.1.114.104 VPN IP 
+
+DNS IP @CtrlS
+192.168.98.245
+103.1.113.2
+
+gislcadmin
+Aeml@daniwin#000
+G!$|(D@4321$#$
+
+10.44.3.37
+admin - Aeml@123
+
+ctrls.1234$#$ - 10.44.2.22
+
+
+hbssadmin
+hb$$@dm!n123
+
+bkpadmin
+bkp@dm!n123
+2.74
+
+
+Vcenter IP : 10.45.6.45
+Username : linux_pd
+Password : Welcome@123$#$
+
+AL51433275 - onboarding - 
+
+182.18.141.40
+cs-unix
+unix!23@
+
+ldm list
+ldm ls-services |more
+ldm add-vnet id=2 vnet2 primary-vsw2 DCAEISUUNI
+ldm ls-config
+ldm add-config 07Nov2019-1
+
+millinia 
+
+em chestunaru meeru?
+ella unnav
+nenu baggunna
+
+===================================
+unx40423/unx41424
+unixent@123$
+
+==================================
+mon60082
+M@m@t#@@mOn
+====================================
+FTP Details 
+ftp://182.18.181.24/
+Username : uprojects
+Password: V9R0jET$@123
+root / welcome@135
+
+====================================
+CTRLS Shared NTP Servers
+NTP Server Hostname	NTP IP Address	Datacenter
+nh01.ctrls.in  	137.59.202.2	Hyderabad
+nh02.ctrls.in	137.59.202.6	Hyderabad
+nm02.ctrls.in 	103.233.127.198	Mumbai
+nm01.ctrls.in   103.233.127.194	Mumbai
+199.34.21.50 Banglore
+199.34.21.51 Banglore 
+
+server 137.59.202.2 iburst
+server 137.59.202.6 iburst
+
+server 103.233.127.198 iburst
+server 103.233.127.194 iburst
+===============================================
+
+
+9959113055
+
+=========================================For IFL Patching ================================
+
+1- Replace the certificate files /etc/rhsm/ca/* from any previous server
+
+2- subscription-manager register --force --org="IFL" --activationkey="RHEL7" 
+
+3- once registration done - run yum update 
+
++=+=+=++=+=+=+=++++++++++++++++++++++++==================+++++++++++++++++++++++++++++++++++
+
+10.1.1.110  - jumpserver
+sivaraml / unix.1234$#$
+
+/etc/rhsm/ca
+
+grub password - root/ctrls.123
+
+
+ftp://45.114.143.222/Unix_Projects/KRPL/
+Logins: ironsafe
+Password: D/[k$``F}s4Tcte%%#@
+45.114.143.222
+
+ftp://182.18.181.24/UNIX_INV/Unix-ENT/Ent_PD/OPF_Tracker.xlsx 
+
+login to redhat portal
+use below logins
+username: ctrls_1
+Password: ctrls@123
+
+NESL default user name password (IP 10.100.200.10)
+ctrls \ F!%H7k8\W&TrMkk
+
+https://182.18.132.75/ui/#/host/vms 
+root / nT9)Vc@%-qZn7DnrUwL:{za
+scc.sus.com
+bmpcl
+Mpeg1$#890
+
+P@55w0rd@123
+
+{:
+SUSE browser
+faizasiatic@gmail.com
+Welcome@123$#$
+
+monuser for BFIL
+$ks$ks@123
+
+ctrlsunix (t%|S#N!X@123$
+@/\/and@123$#$
+
+Public IP - 182.18.132.77
+
+venkatm / V92xDDG!Zy.A4a
+VxDDG!Qy.A3a
+Regency root password
+HEpZB7QYbmd5@
+
+RGCI 
+Faizy-CsLinux / Linux@4893$#$
+
+
+srv-unix@fivestarerp.com
+Ctrls.1234$#$
+
+Welcome#2$!
+10.10.11.15
+Inventory Password - L!0nUX%&^(B
+
+
+venkat - 
+
+103.241.138.20/users
+https://103.241.138.20/users
+faizy.md
+MyCPNrr5xJWH
+
+
+wC1xK2yD0gT4zY6u
+
+MrpB_uY9Sm - Pioneer
+
+
+GXjuWqiy@7
+X@55YR0rZd@193$#$
+Username: root
+Password:	X@55YR0rZd@193$#$
+
+
+KFINTECH Reddy	8000153	dK1iL5eJ9sE6rS7d
+Greeshma	8000154	pU5hQ8nD2rD2oE2a
+Rajesh 		8000156 uI2xL3fY8dM7zJ2i
+Abhishek 	8000252 iX0aP3xO0kS
+
+
+Whatsapp Fake News - 9643000888
+Alt News - 7600011160 
+pU5hQ8nD2rD2oE2a
+
+
+HTyv326499ML
+
+Prasad - 6309059063
+
+ATm9XQhEGNmG - adm.rainbow
+arvindm - 6uGFyj@AGdg#76
+6uGFyj@AGdg#58
+
+
+10.64.7.26 - syslog apcpdcl
+
+Netadmin | Remax123$ | 10.41.171.80 KFINTECH Bitrix Server
+
+export http_proxy=http://10.41.161.90:3128
+export https_proxy=https://10.41.161.90:3128
+
+443 
+
+9999186135 Chirag
+
+User: root
+Pass: R@ut.p1
+
+
+mindgate – mindgate@123
+
+export http_proxy='http://172.27.4.21:80'
+
+VMname:vm-lnx-u18-001
+IP Address:20.193.235.147-172.32.1.133
+Username:wvdadmin
+Password:HgDYvz1O3IdO5h
+
+Terraform
+Server IP:52.183.141.26
+Username: GLBLroot   Password:AzRg1b1!421tdk
+------------------------------------------------------
+IFL Login Arcus
+https://10.1.7.219
+PASSWORD: Welcome@1234$ 
+Username:  41854  
+------------------------------------------------------
+41786 - Pagecoco@123$#$
+==================================================
+Username: itsupport@heterodrugs.com
+Password: Drugsgroup*99
+https://scc.suse.com/organizations/590723/dashboard
+https://scc.suse.com/support/cases/00312460   - AEML Case
+--------------------------------------------------------
+Zabbix Proxy Template 
+
+
+
+
+https://10.41.161.49
+
+adminfocom - tG6tU0zV8q
+
+SUSEConnect -r 72E59A04D06F8765 rao535765@gmail.com
+
+kc$t96MkBSH@K
+
+#ana98000
+Sandeep 9870823203 --- M&M Client for Linux query
+
+Myshift PWD - kD_J9WOv%/ivnOPM
+AEL
+user01 - C1xWvxwQ
+202.143.98.92
+
+
+
+claims@fhpl.net
+
+TSK82842508, CR82832398 - Smart Chip
+bpladmin - z5eDq$pH4xGk
+
+QeP5yUwWzFpcSW73#
+
+Username – 01489
+Password - GMxaOXKCm0MsnT
+
+
+NEC Software Solution 
+
+10.10.120.188 - CentOS7template
+
+C$!nf0V0l$#$ - csinfoadmin
+
+9022302002
+
+
+GMxaOXKCm0MsVC
+GMxaOXKCm0MsAB
+GMxaOXKCm0MsRS
+ftp://45.114.143.222/Templates/Q2_CIS_AUG_21-SUSE12SP3-60GB
+
+43.242.213.12
+cs-unix
+N/6Y%upr36
+
+
+HPSEBADMIN - uI8e4Kvb5XHB
+Mysql - nGJPCGWsf3mi
+replica_user - nGJPCGWsf3mi@#
+
+cs-unix cs-unix.1234$#$
+
+centos - 10.10.120.128
+ubuntu - 10.10.120.104
+suse - 10.10.120.100
+
+cagl mysql - 3x6E9Yc_g$ce
+ksrtc mysql - 3x6E9Yc_g$ce
+
+rainbowadm - QvkbT@65yTBz
+myshift - Hr^bkP_|Kj2d8vAB

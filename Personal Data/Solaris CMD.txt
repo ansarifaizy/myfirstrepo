@@ -1,0 +1,473 @@
+INstalltion solaris
+
+1.install solaris 10
+2.network configure
+	ifconfig <interface> <ip> netmask<255.255> broadcast + up
+	/etc/hostname.e02
+	ifconfig plumb/unplumb
+	3.hostname (/etc/hosts | etc/nodename | etc/hostname.e02 | etc/inet/ipnode)
+4.comment Console line in /etc/default/login
+5.date
+6.locale
+7.take backup of vfstab file
+8.
+
+
+
+
+======swap=================================
+
+to check the swap
+swap -l
+ 
+=======================================
+ kstat cpu_info|grep core_id|sort -u|wc -l
+psrinfo -pv
+psrinfo -p
+vmstat
+
+==========================================
+how to find memory & CPU,core in solaris
+ psrinfo -p (CPU)
+ kstat cpu_info|grep core_id|sort -u|wc -l
+ prtconf | grep Memory
+psrinfo -p  ---physical CPU
+===================================================
+HBA
+[root@BOP1 ~]# systool -c fc_host -v | grep port_name
+    port_name           = "0x2100001b3298ac4b"
+    port_name           = "0x2100001b3298a048"
+
+10.8.54.188 System in Corp
+root@RELHRAP1 # luxadm -e port
+/devices/pci@9,600000/SUNW,qlc@2/fp@0,0:devctl                     CONNECTED
+
+10.8.53.155
+root@RELISUQA # luxadm -e port
+/devices/pci@9,600000/SUNW,qlc@2/fp@0,0:devctl                     CONNECTED
+/devices/pci@8,600000/SUNW,qlc@1/fp@0,0:devctl                     CONNECTED
+/devices/pci@8,600000/SUNW,qlc@2/fp@0,0:devctl                     CONNECTED
+
+==================================================
+
+netstat -rn default gateway
+
+==================================================================
+
+to find & delete
+find /sourcedirectory -mtime 365 -exec mv "{}" /destination/directory/ \;
+
+find out -mtime +110 -exec rm -rf "{}" \;
+
+-mtime +1 means find files more than 1 day old
+-mtime -1 means find files less than 1 day old
+-mtime 1 means find files 1 day old
+============================================================
+logs message
+ 
+tail -10 /var/adm/messages
+
+=====================CPU utilization===========================================
+
+sar -u 5 5
+========================ZFS filesystem=======================================
+
+zpool create oracle c1t2d0 c1t3d0
+zpool destroy sapmnt
+https://www.thegeekdiary.com/zfs-tutorials-creating-zfs-pools-and-file-systems/
+zfs set moutpoint=/test1/ oracle
+
+=============================identification authorize=================================
+
+vi .ssh/known_hosts
+=================================to find cmd =================================
+
+find . -name "MegaCli"
+
+=================================to extend the swap of non global===================
+
+prctl -n zone.max-swap -r -v 30gb -i zone lab01
+
+ zlogin lab01
+
+
+Now you can edit the file /etc/zones/lab01.xml and edit the following line in the global zone
+
+root@sin:/#  vi /etc/zones/lab01.xml
+  <rctl name="zone.max-swap">
+    <rctl-value priv="privileged" limit="21474836480" action="deny"/>
+
+The correct value should be now
+
+  <rctl name="zone.max-swap">
+    <rctl-value priv="privileged" limit="32212254720" action="deny"/>
+
+========================NFS-Mount==================================================
+
+svcadm -v enable network/nfs/server  ---- Enable nfs service
+Server - share -F nfs -o rw /oracle 
+Client - mount -F nfs rw server IP:/directory /mount-point
+
+mount -F nfs -O 10.8.48.113:/oracle /oracle1
+umount -f /oracle force fully
+===================================================================================
+Installation and Configuration of Locale 
+
+1 - Mount iso in /cdrom
+ * lofiadm -a /oracle/sol-10-u11-ga-sparc-dvd.iso
+ * mount -o ro -F hsfs /dev/lofi/1 /cdrom/
+
+2 - Install locale package from mount point 
+ *  localeadm -a india -d /cdrom/Solaris_10/Product/
+ *  localeadm -a en_US.ISO8859-15 -d /cdrom/Solaris_10/Product/ 
+
+3 - To check installed locale package 
+ *  locale -a 
+
+4 - Configure locale 
+ * Edit file - vi /etc/default/init 
+LC_COLLATE=en_US.ISO8859-15
+LC_CTYPE=en_US.ISO8859-15
+LC_MESSAGES=C
+LC_MONETARY=en_US.ISO8859-15
+LC_NUMERIC=en_US.ISO8859-15
+LC_TIME=en_US.ISO8859-15
+
+
+TZ=Asia/Calcutta
+CMASK=022
+LC_COLLATE=en_US.ISO8859-15
+LC_CTYPE=en_US.ISO8859-15
+LC_MESSAGES=C
+LC_MONETARY=en_US.ISO8859-15
+LC_NUMERIC=en_US.ISO8859-15
+LC_TIME=en_US.ISO8859-15
+
+
+
+
+5 - unmount /cdrom 
+    lofiadm -d /dev/lofi/1	\\
+====================================HBA cmd=======================================
+
+luxadm -e port- on line connectivity
+
+fcinfo hba-port- WWN number
+
+fcinfo hba-port | grep -i HBA
+
+=====================================Date time======================================
+
+log in as a root
+date 07041104   date 08171740
+date mmddhrmin
+========================================network=========================================
+
+ifconfig e02 plumb/unlumb
+
+ifconfig e02 10.125.47.xx netmask 255.255.255.128 broadcast + up
+
+
+ route -p add 10.10.10.0 -netmask 255.255.255.0 192.168.1.1
+route -p add default 192.168.1.1
+ 
+route -p <add/delete> <hostname> <gateway> -ifp <interface>
+
+route -p add 224.0.0.0 netmask 255.255.255.0 10.125.48.130 -ifp 
+
+
+================================Not on system console telnt=============================
+
+
+comment out the CONSOLE line in /etc/default/login
+To enable ssh on solaris 
+Edit file - cat /etc/ssh/sshd_config 
+PermitRootLogin yes
+
+======================================================================
+
+mount -F nfs -O 10.8.48.113:/oracle /oracle1
+=============================Zone IP addrss===============================================
+
+add IP address to local zone from global zone
+
+ifconfig igb3:3 10.125.31.91 netmask 255.255.255.128 zone relmeteccdev1
+ifconfig igb0:1 10.125.31.91 netmask 255.255.255.128 zone relmeteccdev1 broadcast + up
+
+======================================Process CMD======================================
+
+ps -ef
+pkill <PID>
+kill -9 <PID><name>
+https://docs.oracle.com/cd/E19683-01/806-4743/processmanagerusing-62/index.html
+
+========================================Check disk failure======================================
+
+iostat -xne
+=======================================FTP===================================
+
+for downloading the file
+
+cd /sampant present working dir 
+then
+>ls 
+>FTP 10.8.54.XX
+>get/mget <file name>
+>put
+
+=========================================linux proc & memory========================================================
+CPU-  cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l
+
+Processor-	cat /proc/cpuinfo | grep "cpu cores" | uniq
+
+Virtual Processor-	cat /proc/cpuinfo | grep -i processor 
+
+memory- free -g
+===================================solaris checkcpuinfo=====================================================
+psrinfo -vp  core
+psrinf	-p   cpu
+
+======================System Serial Number=================================================
+eeprom |grep -i ChassisSerialNumber
+
+=================How to collect explorer data=============================================
+
+Solaris 8,9,10: 
+
+   1 - Run the script : 
+       /opt/SUNWexplo/bin/explorer 
+
+       If first time, you will need to run the explorer with the option '-g' for file configuration as informed below: 
+       /opt/SUNWexplo/bin/explorer -g 
+
+
+   2 - Wait until script is finished, then upload result file (.tar.gz) 
+       Output directory: 
+       /opt/SUNWexplo/output 
+
+================================Zone CMD==========================================
+
+zoneadm list -cv
+vxdisk -eo alldgs
+vxdisk -eo alldgs list
+svcadm restart svc:/network/physical
+zlogin RELHRBO
+fcinfo hba-port -l
+luxadm -r port
+fcinfo remote-port -ls -p 2100001b3282c706
+cfgadm -al -o show_SCSI_LUN
+vxdisk -o alldgs list
+svcadm restart svc:/network/physical
+
+
+====================================Listeing port in linux==========================
+nmap -sT -O localhost
+
+
+====================================Explorer Report=================================
+
+1. cd /opt/SUNWexplo/bin 
+2. Explorer 
+3. cd ../output 
+4. ls -lrt 
+5. Check for a file with extension .tar.gz 
+6. Run ftp from your laptop and get this file.
+
+
+=====================================ram & cpu===========================
+
+grep -c ^processor /proc/cpuinfo  -----------number of core
+free -m 			--------------- RAM
+
+
+=================================NFS permission nobody issue=========================
+https://cloudvedas.com/getting-nobody-as-owner-of-nfs-filesystem-on-solaris-client/
+
+==================================================================================================
+
+zoneadm list -cv
+vxdisk -eo alldgs
+vxdisk -eo alldgs list
+svcadm restart svc:/network/physical
+zlogin RELHRBO
+fcinfo hba-port -l
+luxadm -r port
+fcinfo remote-port -ls -p 2100001b3282c706
+cfgadm -al -o show_SCSI_LUN
+vxdisk -o alldgs list
+svcadm restart svc:/network/physical
+
+==============================================Linux HBA status======================================================
+yum install sysfsutils
+systool -c fc_host			-------------hostnamme
+systool -c fc_host -v | grep port_name	-------------WWN number
+systool -c fc_host -v | grep port_state    -----------state online offline
+
+https://www.thegeekdiary.com/how-to-identify-the-hba-cardsports-and-wwn-in-rheloel/
+
+
+=================================================Xstart Rhel 7=======================================================
+yum install xterm
+/usr/bin/xterm -ls -display $DISPLAY
+
+=========================================Hostname persistant in rhel7===================================================
+
+hostname AEMLDB1
+do the entry in /etc/hostname --->AEMLDB1 & save the file & check after reboot
+
+https://www.tecmint.com/set-change-hostname-in-centos-7/
+
+==========================================Scan the Storage Lun in RHEL7=====================================
+1. Finding the existing disk from fdisk.
+fdisk -l |egrep '^Disk' |egrep -v 'dm-'
+
+2. Find out how many SCSI controller configured.
+ls /sys/class/scsi_host/host
+
+3. Scan the SCSI disks using below command.
+[root@mylinz1 ~]# echo "- - -" > /sys/class/scsi_host/host0/scan
+[root@mylinz1 ~]# echo "- - -" > /sys/class/scsi_host/host1/scan
+[root@mylinz1 ~]# echo "- - -" > /sys/class/scsi_host/host2/scan
+
+4. Verify if the new disks are visible or not
+[root@mylinz1 ~]# fdisk -l |egrep '^Disk' |egrep -v 'dm-'
+Disk /dev/sda: 21.5 GB, 21474836480 bytes
+Disk /dev/sdb: 1073 MB, 1073741824 bytes
+Disk /dev/sdc: 1073 MB, 1073741824 bytes
+
+5.If multipath is being used ( device-mapper ) below command can be used:
+multipath -v4 -ll
+
+the mount the filesystem after scaning the lun
+For.eg
+multipath -ll
+lvscan
+pvcreate /dev/mapper/mpathi
+pvdisplay
+vgcreate vg_sol1 /dev/mapper/mpathi
+vgdisplay
+lvcreate --size 99GB -n lv_sol1 vg_sol1
+mkfs.ext4 /dev/vg_sol1/lv_sol1
+mount /dev/vg_sol1/lv_sol1 /sapmnt
+===========================How to find mountpoint running in which Filesystem in rhel=============================
+lsblk -f
+
+==============================================Time & date in Rhel=================================================
+
+timedatectl set-time '2019-03-02 10:43'
+
+====================================================IP tables disble in Rhel 6 & 7===================================
+In rhel6.5
+iptables --flush
+service stop iptables
+chkconfig iptables off
+
+
+In RHEL7
+systemctl stop iptables
+systemctl disable iptables
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+
+https://www.thegeekdiary.com/centos-rhel-7-never-run-the-iptables-service-and-firewalld-service-at-the-same-time/
+
+=-==================================to see process ID in linux child & parent process=============================
+ pstree -p
+ & to kill the process 
+ kill -9 <PID>
+who -a user with PID 
+============================================== UUID & UUIDD installation in RHEL6 or 7============================
+
+yum install uuid
+yum install uuidd
+
+===============================How to creat VM in Hyper-V=======================================================
+
+http://www.itingredients.com/create-virtual-machine-hyper-v-server-2012-r2/
+
+
+===============================================Virtual IP in RHEL===============================================
+
+https://linuxconfig.org/how-to-configure-virtual-network-interface-on-redhat-7-linux
+
+======================================Scan and configure ZFS Pool===================================================== 
+# cfgadm -al -o show_FCP_dev
+# cfgadm -al -o show_FCP_dev |grep fc-fabric
+# echo | format	
+# devfsadm -Cv
+# zpool create zpool-name c1t0d0 c1t1d0
+
+============================= Importing zfs pool storage ========================================================
+# zpool import zpool_name
+Import zpool with different name
+# zpool import zpool_name new_zpool_name
+# zpool status zpool_name
+# zpool import -f zpoolname
+=============================== renaming zfs mountpoint ===================================================
+
+#zfs set mountpoint=/newfilesystem PoolName/oldfilesystem
+========================================== ssh service start====================================
+# svcadm -v restart /network/ssh
+#svcadm enable svc:/system/filesystem/local:default   --- if issue in filesystem
+#svcs -d ssh  ------ To check dependencies of services.
+==========================================================================================================
+keyserv Daemon Disables Some File System Services
+
+svcadm disable network/rpc/keyserv
+svcadm disable -t network/nfs/client:default
+svcadm enable network/nfs/client:default
+svcadm disable -t network/nfs/server:default
+svcadm enable network/nfs/server:default
+svcadm disable -t network/rpc/gss
+svcadm enable network/rpc/gss
+===========================================LVEXTEND on Suse=======================================================================
+lvcreate -n LVName -l +100%FREE VGNAME
+lvextend -l +100%FREE /dev/mapper/DATAVG-Oracle
+xfs_growfs /oracle  -- --- to resize the FS of xfs filesystem
+
+=================================================================================================================
+nfsstat
+rpcinfo
+
+==================================Memory status in solaris 10======================================================================
+
+# echo "::memstat" | mdb -k
+# prstat -s rss 
+
+find /isuint/imri/out/cyc/mob/ -mtime +10 -exec rm -rf "{}" \;
+
+# dmsetup remove /dev/myvg/lvname
+
+=================================Share NFS in solaris for SUSE client=============
+
+share -F nfs -o rw,anon=0   /oracle6/EXPP20
+===========================To set password policy ==================================
+
+vi /etc/default/passwd
+==============================================================================================
+
+make changes in /etc/sysctl.conf and /etc/security/limit.conf 
+
+==========================================To check zfs record size===========================
+#zfs get all POOLNAME
+
+=================================Set zfs parameter=======================================================
+
+#vi /etc/system
+set zfs:zfs_arc_max=10737418240
+set rlim_fd_cur=65536
+set rlim_fd_max=65536
+set ssd:ssd_max_throttle=32
+set zfs:zfs_vdev_max_pending=32
+set noexec_user_stack=1
+set noexec_user_stack_log=1
+============================================================================================
+
+# ldm rm-vdisk disk-name ldom
+# ldm rm-vdsdev volume-name@service-name
+====================Creating directory structure==================================
+Source location - find . -type d > dirs.txt
+Destination location -  xargs mkdir -p < dirs.txt
+
+=========================================================================================
+
